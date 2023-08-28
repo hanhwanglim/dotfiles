@@ -1,0 +1,9 @@
+[init]
+	defaultBranch = main
+[user]
+	email = hanhwanglim@gmail.com
+	name = Han Hwang Lim
+[includeIf "gitdir:~/dev/xelix/"]
+    path = ~/dev/xelix/.gitconfig
+[core]
+	editor = vim
