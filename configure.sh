@@ -1,2 +1,4 @@
-ln -s "$(pwd)/.zshrc" ~/.zshrc
-ln -s "$(pwd)/.gitconfig" ~/.gitconfig
+#!/bin/sh
+ln -s "dotfiles/.zshrc" ~/.zshrc
+ln -s "dotfiles/.gitconfig" ~/.gitconfig
+
