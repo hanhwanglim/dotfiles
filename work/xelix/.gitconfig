@@ -1,0 +1,8 @@
+
+[init]
+	defaultBranch = main
+[user]
+	email = han.lim@xelix.com
+	name = Han Hwang Lim
+[core]
+	editor = vim
