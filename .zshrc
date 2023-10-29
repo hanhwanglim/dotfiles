@@ -133,7 +133,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH=/home/hh/.local/bin:$PATH
 
 # direnv
-eval "$(direnv hook bash)"
+eval "$(direnv hook zsh)"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
