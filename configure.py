@@ -13,6 +13,10 @@ def files(profile: str) -> list[tuple[Path, Path]]:
             Path(Path.home(), ".zshrc"),
         ),
         (
+            Path(__file__).parent / ".zsh_history",
+            Path(Path.home(), ".zsh_history"),
+        ),
+        (
             Path(__file__).parent / profile / ".aws",
             Path(Path.home(), ".aws"),
         ),
