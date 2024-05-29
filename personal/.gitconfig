@@ -1,7 +1,0 @@
-[init]
-	defaultBranch = main
-[user]
-	email = hanhwanglim@gmail.com
-	name = Han Hwang Lim
-[core]
-	editor = vim
