@@ -41,33 +41,21 @@ else
 fi
 
 alias vim="nvim"
-
-alias personal="cd $HOME/Dev/personal"
-alias xelix="cd $HOME/Dev/xelix"
-alias backend="cd $HOME/Dev/xelix/platform-api"
-alias frontend="cd $HOME/Dev/xelix/platform-front-end"
+alias ea="exa -la --icons"
+alias cat="bat"
 
 # Settings
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # poetry
 export PATH="$HOME/.local/bin:$PATH"
 
 # direnv
 eval "$(direnv hook zsh)"
 
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
 # Atuin
 eval "$(atuin init zsh)"
 
-# dotem
-eval "$("dotem-cli" hook)"
+# zoxide
+eval "$(zoxide init zsh)"
 
 # go
 export PATH=$PATH:/usr/local/go/bin
