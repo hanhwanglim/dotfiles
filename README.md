@@ -8,6 +8,12 @@ Just my dotfiles for myself.
 
 - Git
 - GNU Stow
+- antidote
+- Neovim
+- exa
+- bat
+- atuin
+- zoxide
 
 ### Steps
 
