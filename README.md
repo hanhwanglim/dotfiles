@@ -20,5 +20,5 @@ Just my dotfiles for myself.
 ```
 git clone https://github.com/hanhwanglim/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-stow .
+stow {dirname} --adopt
 ```
