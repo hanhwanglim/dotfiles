@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 HISTSIZE=10000
 SAVEHIST=10000
 HIST_STAMPS="yyyy-mm-dd"
@@ -18,7 +11,6 @@ setopt HIST_VERIFY
 setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY # share command history data
 
-# eval "$(starship init zsh)"
 
 # Antigen
 zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
@@ -44,28 +36,15 @@ alias vim="nvim"
 alias ea="exa -la --icons"
 alias cat="bat"
 
-# Settings
-# poetry
-export PATH="$HOME/.local/bin:$PATH"
 
-# direnv
 eval "$(direnv hook zsh)"
-
-# Atuin
+eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
-
-# zoxide
 eval "$(zoxide init zsh)"
 
-# go
-export PATH=$PATH:/usr/local/go/bin
-
-# bun completions
 [ -s "/home/han/.bun/_bun" ] && source "/home/han/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH="$HOME/.local/bin:$PATH"
+export PATH=$PATH:/usr/local/go/bin
+export PATH="$BUN_INSTALL/bin:$PATH"
