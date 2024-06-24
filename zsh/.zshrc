@@ -32,15 +32,11 @@ else
   export EDITOR='nvim'
 fi
 
-alias vim="nvim"
-alias ea="exa -la --icons"
-alias cat="bat"
-
-
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(dotem-cli hook)"
 
 [ -s "/home/han/.bun/_bun" ] && source "/home/han/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
@@ -48,3 +44,8 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+alias vim="nvim"
+alias ls="exa -la --icons"
+alias cat="bat"
+alias cd="z"

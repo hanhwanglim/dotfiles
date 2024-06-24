@@ -10,6 +10,7 @@ $git_status
 
 right_format = """
 $python\
+$nodejs\
 $cmd_duration
 """
 
