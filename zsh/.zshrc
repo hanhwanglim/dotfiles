@@ -32,11 +32,6 @@ else
   export EDITOR='nvim'
 fi
 
-eval "$(direnv hook zsh)"
-eval "$(starship init zsh)"
-eval "$(atuin init zsh)"
-eval "$(zoxide init zsh)"
-eval "$(dotem-cli hook)"
 
 [ -s "/home/han/.bun/_bun" ] && source "/home/han/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
@@ -45,7 +40,22 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-alias vim="nvim"
-alias ls="exa -la --icons"
-alias cat="bat"
-alias cd="z"
+eval "$(direnv hook zsh)"
+eval "$(starship init zsh)"
+eval "$(atuin init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(dotem-cli hook)"
+eval "$(mise activate zsh)"
+
+if command -v nvim &> /dev/null; then
+	alias vim="nvim"
+fi
+if command -v exa &> /dev/null; then
+	alias ls="exa -la --icons"
+fi
+if command -v bat &> /dev/null; then 
+	alias cat="bat"
+fi
+if command -v z &> /dev/null; then 
+	alias cd="z"
+fi
