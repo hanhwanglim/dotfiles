@@ -11,7 +11,8 @@ $git_status
 right_format = """
 $python\
 $nodejs\
-$cmd_duration
+$cmd_duration\
+$time
 """
 
 [character]
@@ -21,6 +22,9 @@ error_symbol = "[➜](bold red)"
 [cmd_duration]
 min_time = 0
 format = "[$duration]($style) "
+
+[time]
+disabled = false
 
 [directory]
 read_only = " 󰌾"

@@ -7,3 +7,4 @@
     path = ~/Dev/xelix/.gitconfig
 [core]
 	editor = vim
+	autocrlf = input
