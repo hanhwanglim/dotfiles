@@ -4,7 +4,8 @@ env_file = ".env"
 python.uv_venv_auto = true
 
 [tools]
-node = "latest"
+node = "lts"
 uv = "latest"
 rust = "latest"
 go = "latest"
+

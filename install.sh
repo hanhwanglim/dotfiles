@@ -127,7 +127,9 @@ stow_configurations() {
     print_info "Stowing configurations..."
     cd ~/dotfiles
 
-    rm ~/.zshrc # stow errors if ~/.zshrc exists
+    # stow errors if exists
+    rm ~/.zshrc 
+    rm ~/.gitconfig
 
     dirs_to_stow=("alacritty" "home" "mise" "nvim" "starship" "zsh")
 
