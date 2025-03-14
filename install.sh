@@ -50,7 +50,8 @@ install_dependencies() {
     elif [[ $1 == "ubuntu" ]]; then
         print_info "Installing dependencies with apt..."
         sudo apt update
-        sudo apt install -y git stow neovim bat zoxide curl eza tmux zsh unzip
+        sudo apt install -y git stow neovim bat curl eza tmux zsh unzip \
+            ffmpeg 7zip jq poppler-utils fd-find ripgrep fzf zoxide imagemagick # yazi related
 
         # Install atuin if not already installed
         if ! command -v atuin &> /dev/null; then
@@ -68,12 +69,6 @@ install_dependencies() {
         if ! command -v mise &> /dev/null; then
             print_info "Installing mise..."
             curl https://mise.run | sh
-        fi
-
-        # Install yazi if not already installed
-        if ! command -v yazi &> /dev/null; then
-            print_info "Installing yazi..."
-            cargo install --locked yazi-fm
         fi
     fi
 }
@@ -132,9 +127,9 @@ stow_configurations() {
     print_info "Stowing configurations..."
     cd ~/dotfiles
 
-    rm ~/.zshrc
+    rm ~/.zshrc # stow errors if ~/.zshrc exists
 
-    dirs_to_stow=("alacritty" "home" "nvim" "starship" "zsh")
+    dirs_to_stow=("alacritty" "home" "mise" "nvim" "starship" "zsh")
 
     for dir in "${dirs_to_stow[@]}"; do
         print_info "Stowing $dir..."
@@ -168,12 +163,6 @@ main() {
 
     # Install fonts
     install_fonts "$os"
-
-    # Clone dotfiles if not already present
-    if [[ ! -d ~/dotfiles ]]; then
-        print_info "Cloning dotfiles repository..."
-        git clone https://github.com/hanhwanglim/dotfiles.git ~/dotfiles
-    fi
 
     # Stow configurations
     stow_configurations

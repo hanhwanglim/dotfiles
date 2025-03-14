@@ -32,11 +32,6 @@ export EDITOR='nvim'
 # Path configuration
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Tool installation
-[ -s "/home/han/.bun/_bun" ] && source "/home/han/.bun/_bun"
-export BUN_INSTALL="$HOME/.bun"
 
 # Tool initialization
 eval "$(starship init zsh)"

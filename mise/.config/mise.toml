@@ -1,0 +1,10 @@
+[settings]
+jobs = 4
+env_file = ".env"
+python.uv_venv_auto = true
+
+[tools]
+node = "latest"
+uv = "latest"
+rust = "latest"
+go = "latest"
