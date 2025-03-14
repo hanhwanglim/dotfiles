@@ -8,3 +8,13 @@
 [core]
 	editor = vim
 	autocrlf = input
+[color]
+	ui = auto
+[push]
+	default = simple
+	autoSetupRemote = true
+[merge]
+	log = true
+[diff]
+	algorithm = patience
+	renames = copies

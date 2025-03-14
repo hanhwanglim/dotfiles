@@ -1,7 +1,18 @@
-Plug 'machakann/vim-highlightedyank'
-
 set number
 set relativenumber
 
-set peekaboo
+set clipboard+=unnamed
 
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+
+set showmode
+set showcmd
+set visualbell
+set noerrorbells
+
+Plug 'machakann/vim-highlightedyank'
+
+set peekaboo

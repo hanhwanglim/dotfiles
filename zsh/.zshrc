@@ -26,34 +26,40 @@ fi
 
 source ${zsh_plugins}.zsh
 
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nvim'
-else
-  export EDITOR='nvim'
-fi
+# Editor configuration
+export EDITOR='nvim'
 
-
-[ -s "/home/han/.bun/_bun" ] && source "/home/han/.bun/_bun"
-export BUN_INSTALL="$HOME/.bun"
-
+# Path configuration
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# Tool installation
+[ -s "/home/han/.bun/_bun" ] && source "/home/han/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
+
+# Tool initialization
 eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
 
+# Aliases - Modern alternatives
 if command -v nvim &> /dev/null; then
 	alias vim="nvim"
+	alias vi="nvim"
 fi
+
 if command -v exa &> /dev/null; then
 	alias ls="exa -la --icons"
+	alias ll="exa -l --icons"
+	alias lt="exa -T --icons"
 fi
+
 if command -v bat &> /dev/null; then 
 	alias cat="bat"
 fi
+
 if command -v z &> /dev/null; then 
 	alias cd="z"
 fi
