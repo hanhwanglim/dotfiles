@@ -46,27 +46,46 @@ install_package_managers() {
 install_dependencies() {
     if [[ $1 == "macos" ]]; then
         print_info "Installing dependencies with Homebrew..."
-        brew install git stow neovim exa bat atuin zoxide mise starship tmux zsh
+        brew install git stow neovim exa bat atuin zoxide mise starship tmux zsh unzip yazi
     elif [[ $1 == "ubuntu" ]]; then
         print_info "Installing dependencies with apt..."
         sudo apt update
-        sudo apt install -y git stow neovim bat zoxide curl eza tmux zsh
+        sudo apt install -y git stow neovim bat zoxide curl eza tmux zsh unzip
 
-        # Install atuin
-        bash <(curl https://raw.githubusercontent.com/atuinsh/atuin/main/install.sh)
+        # Install atuin if not already installed
+        if ! command -v atuin &> /dev/null; then
+            print_info "Installing atuin..."
+            bash <(curl https://raw.githubusercontent.com/atuinsh/atuin/main/install.sh)
+        fi
 
-        # Install starship
-        curl -sS https://starship.rs/install.sh | sh
+        # Install starship if not already installed
+        if ! command -v starship &> /dev/null; then
+            print_info "Installing starship..."
+            curl -sS https://starship.rs/install.sh | sh
+        fi
 
-        # Install mise
-        curl https://mise.run | sh
+        # Install mise if not already installed
+        if ! command -v mise &> /dev/null; then
+            print_info "Installing mise..."
+            curl https://mise.run | sh
+        fi
+
+        # Install yazi if not already installed
+        if ! command -v yazi &> /dev/null; then
+            print_info "Installing yazi..."
+            cargo install --locked yazi-fm
+        fi
     fi
 }
 
 # Install antidote (zsh plugin manager)
 install_antidote() {
     print_info "Installing antidote..."
-    git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
+    if [[ ! -d "${ZDOTDIR:-~}/.antidote" ]]; then
+        git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-~}/.antidote
+    else
+        print_info "antidote is already installed"
+    fi
 }
 
 # Install JetBrains Mono Nerd Font
@@ -76,6 +95,12 @@ install_fonts() {
         brew tap homebrew/cask-fonts
         brew install --cask font-jetbrains-mono-nerd-font
     elif [[ $1 == "ubuntu" ]]; then
+        # Install fontconfig if not already installed
+        if ! command -v fc-cache &> /dev/null; then
+            print_info "Installing fontconfig..."
+            sudo apt install -y fontconfig
+        fi
+
         mkdir -p ~/.local/share/fonts
         cd ~/.local/share/fonts
         curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip
@@ -100,6 +125,21 @@ change_shell_to_zsh() {
     else
         print_info "zsh is already the default shell."
     fi
+}
+
+# Stow configurations
+stow_configurations() {
+    print_info "Stowing configurations..."
+    cd ~/dotfiles
+
+    rm ~/.zshrc
+
+    dirs_to_stow=("alacritty" "home" "nvim" "starship" "zsh")
+
+    for dir in "${dirs_to_stow[@]}"; do
+        print_info "Stowing $dir..."
+        stow -R "$dir"
+    done
 }
 
 # Main installation
@@ -136,13 +176,7 @@ main() {
     fi
 
     # Stow configurations
-    print_info "Stowing configurations..."
-    cd ~/dotfiles
-    for dir in */; do
-        dir=${dir%/}
-        print_info "Stowing $dir..."
-        stow -R "$dir"
-    done
+    stow_configurations
 
     print_success "Installation complete! Please restart your terminal for changes to take effect."
     print_info "Note: You may need to manually install additional tools mentioned in your configs."
