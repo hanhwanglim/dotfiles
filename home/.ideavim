@@ -1,0 +1,7 @@
+Plug 'machakann/vim-highlightedyank'
+
+set number
+set relativenumber
+
+set peekaboo
+

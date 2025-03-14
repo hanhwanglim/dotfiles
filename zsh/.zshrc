@@ -40,11 +40,9 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
 eval "$(atuin init zsh)"
 eval "$(zoxide init zsh)"
-eval "$(dotem-cli hook)"
 eval "$(mise activate zsh)"
 
 if command -v nvim &> /dev/null; then
@@ -60,3 +58,4 @@ if command -v z &> /dev/null; then
 	alias cd="z"
 fi
 
+alias activate="source .venv/bin/activate"
