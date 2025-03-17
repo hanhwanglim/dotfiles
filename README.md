@@ -2,23 +2,14 @@
 
 Just my dotfiles for myself.
 
-## Installation
-
-### Prerequisites
-
-- Git
-- GNU Stow
-- antidote
-- Neovim
-- exa
-- bat
-- atuin
-- zoxide
+1. clone the repo
+2. run install.sh
 
 ### Steps
 
 ```
 git clone https://github.com/hanhwanglim/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-stow {dirname} --adopt
+chmod +x install.sh
+./install.sh
 ```
