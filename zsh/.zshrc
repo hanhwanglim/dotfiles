@@ -46,7 +46,8 @@ if command -v nvim &> /dev/null; then
 fi
 
 if command -v exa &> /dev/null; then
-	alias ls="exa -la --icons"
+	alias ls="exa"
+	alias la="exa -la --icons"
 	alias ll="exa -l --icons"
 	alias lt="exa -T --icons"
 fi

@@ -2,6 +2,7 @@
 jobs = 4
 env_file = ".env"
 python.uv_venv_auto = true
+experimental = true
 
 [tools]
 node = "lts"

@@ -128,8 +128,8 @@ stow_configurations() {
     cd ~/dotfiles
 
     # stow errors if exists
-    rm ~/.zshrc 
-    rm ~/.gitconfig
+    [ -e ~/.zshrc ] && rm ~/.zshrc
+    [ -e ~/.gitconfig ] && rm ~/.gitconfig
 
     dirs_to_stow=("alacritty" "home" "mise" "nvim" "starship" "zsh")
 
