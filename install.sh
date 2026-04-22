@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+BACKUP_DIR=""
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -53,6 +56,8 @@ install_dependencies() {
             curl https://mise.run | sh
         fi
     fi
+
+    export PATH="$HOME/.local/bin:$PATH"
 }
 
 install_antidote() {
@@ -66,6 +71,7 @@ install_antidote() {
 
 change_shell_to_zsh() {
     print_info "Changing default shell to zsh..."
+
     if ! grep -q "$(command -v zsh)" /etc/shells; then
         print_info "Adding zsh to /etc/shells..."
         command -v zsh | sudo tee -a /etc/shells
@@ -80,19 +86,62 @@ change_shell_to_zsh() {
     fi
 }
 
+backup_target() {
+    local target="$1"
+    local relative_path
+
+    if [[ ! -e "$target" && ! -L "$target" ]]; then
+        return 0
+    fi
+
+    if [[ -L "$target" ]]; then
+        return 0
+    fi
+
+    if [[ -z "$BACKUP_DIR" ]]; then
+        BACKUP_DIR="$HOME/.dotfiles-backups/$(date +%Y%m%d-%H%M%S)"
+        mkdir -p "$BACKUP_DIR"
+        print_info "Backing up existing files to $BACKUP_DIR..."
+    fi
+
+    relative_path="${target#$HOME/}"
+    mkdir -p "$BACKUP_DIR/$(dirname "$relative_path")"
+    mv "$target" "$BACKUP_DIR/$relative_path"
+}
+
+backup_existing_configs() {
+    local targets=(
+        "$HOME/.config/ghostty/config"
+        "$HOME/.gitconfig"
+        "$HOME/.ideavim"
+        "$HOME/.tmux.conf"
+        "$HOME/.config/mise.toml"
+        "$HOME/.config/starship.toml"
+        "$HOME/.zshenv"
+        "$HOME/.zshrc"
+        "$HOME/.zsh_plugins.txt"
+    )
+
+    for target in "${targets[@]}"; do
+        backup_target "$target"
+    done
+}
+
 stow_configurations() {
     print_info "Stowing configurations..."
-    cd ~/dotfiles
+    backup_existing_configs
 
-    [ -e ~/.zshrc ] && rm ~/.zshrc
-    [ -e ~/.gitconfig ] && rm ~/.gitconfig
-
-    dirs_to_stow=("ghostty" "home" "mise" "nvim" "starship" "zsh")
+    dirs_to_stow=("ghostty" "home" "mise" "starship" "zsh")
 
     for dir in "${dirs_to_stow[@]}"; do
         print_info "Stowing $dir..."
-        stow -R "$dir"
+        stow --dir="$SCRIPT_DIR" --target="$HOME" -R "$dir"
     done
+}
+
+install_mise_tools() {
+    print_info "Installing tools managed by mise..."
+    mise install
 }
 
 main() {
@@ -110,14 +159,15 @@ main() {
 
     install_dependencies "$os"
 
-    change_shell_to_zsh
-
     install_antidote
 
     stow_configurations
 
+    install_mise_tools
+
+    change_shell_to_zsh
+
     print_success "Installation complete! Please restart your terminal for changes to take effect."
-    print_info "Note: You may need to manually install additional tools mentioned in your configs."
 }
 
 main
