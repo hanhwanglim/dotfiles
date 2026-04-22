@@ -27,7 +27,7 @@ fi
 source ${zsh_plugins}.zsh
 
 # Editor configuration
-export EDITOR='nvim'
+export EDITOR='vim'
 
 # Path configuration
 export PATH="$HOME/.local/bin:$PATH"
@@ -40,16 +40,11 @@ eval "$(zoxide init zsh)"
 eval "$(mise activate zsh)"
 
 # Aliases - Modern alternatives
-if command -v nvim &> /dev/null; then
-	alias vim="nvim"
-	alias vi="nvim"
-fi
-
-if command -v exa &> /dev/null; then
-	alias ls="exa"
-	alias la="exa -la --icons"
-	alias ll="exa -l --icons"
-	alias lt="exa -T --icons"
+if command -v eza &> /dev/null; then
+	alias ls="eza"
+	alias la="eza -la --icons"
+	alias ll="eza -l --icons"
+	alias lt="eza -T --icons"
 fi
 
 if command -v bat &> /dev/null; then 

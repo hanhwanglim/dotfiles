@@ -5,8 +5,19 @@ python.uv_venv_auto = true
 experimental = true
 
 [tools]
-node = "lts"
-uv = "latest"
-rust = "latest"
+atuin = "latest"
+bat = "latest"
+eza = "latest"
+fzf = "latest"
+github-cli = "latest"
 go = "latest"
-
+node = "lts"
+ripgrep = "latest"
+ruby = "latest"
+rust = "latest"
+starship = "latest"
+tmux = "latest"
+uv = "latest"
+viteplus = "latest"
+yazi = "latest"
+zoxide = "latest"
