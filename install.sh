@@ -44,7 +44,7 @@ install_package_managers() {
 install_dependencies() {
     if [[ $1 == "macos" ]]; then
         print_info "Installing dependencies with Homebrew..."
-        brew install git stow mise zsh
+        brew bundle --file Brewfile
 
     elif [[ $1 == "ubuntu" ]]; then
         print_info "Installing dependencies with apt..."
