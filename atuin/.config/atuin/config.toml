@@ -1,0 +1,5 @@
+history_filter = [
+    # ...
+    # Ignore commands that start with *exactly* 1 space
+    "^ ([^ ].*)",
+]
